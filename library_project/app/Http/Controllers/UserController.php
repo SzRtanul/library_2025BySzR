@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -69,10 +70,19 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(["message" => $validator->errors()->all()], 400);
         }
-        $user->update([
+       /* $user->update([
             "password" => Hash::make($request->password),
-        ]);
+        ]);*/
+
+        
+
         return response()->json($user, 200);
+    }
+
+    public function rawExample($copy_id){
+        $results = DB::select(
+            "SELECT user_id, created_at from lendings where copy_id = $copy_id"
+        );
     }
 
 }

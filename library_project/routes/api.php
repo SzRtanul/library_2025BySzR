@@ -28,6 +28,7 @@ Route::middleware(['auth:sanctum'])
     Route::patch("/update-password", [UserController::class, "updatePassword"]);
     Route::get("/my-lendings-at-me", [LendingController::class, "myLendingsAtMe"]);
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
+    Route::post('/rave/{copy_id}', [UserController::class, 'rawExample']);
 });
 
 //admin
